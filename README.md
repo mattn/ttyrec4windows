@@ -26,10 +26,14 @@ $ go get github.com/ttyrec4windows/ttyrec
 $ go get github.com/ttyrec4windows/ttyplay
 ```
 
-# License
+## Screenshot
+
+![](https://raw.githubusercontent.com/mattn/ttyrec4windows/master/data/screenshot.gif)
+
+## License
 
 MIT
 
-# Author
+## Author
 
 Yasuhiro Matsumoto (a.k.a mattn)
