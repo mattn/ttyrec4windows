@@ -6,7 +6,6 @@ import (
 	"encoding/binary"
 	"flag"
 	"fmt"
-	"github.com/mattn/go-runewidth"
 	"os"
 	"os/signal"
 	"strconv"
@@ -229,9 +228,6 @@ loop:
 						}
 					} else {
 						fmt.Print(string(c1))
-						if int(csbi.cursorPosition.x) + runewidth.RuneWidth(c1) > int(csbi.window.right) {
-							panic(1)
-						}
 					}
 				case c1 == '\r' || c1 == '\t' || c1 >= 0x20:
 					if *flag_d {
