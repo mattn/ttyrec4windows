@@ -22,8 +22,8 @@ $ ttyplay ttyrecord
 ## Installation
 
 ```
-$ go get github.com/ttyrec4windows/ttyrec
-$ go get github.com/ttyrec4windows/ttyplay
+$ go get github.com/mattn/ttyrec4windows/ttyrec
+$ go get github.com/mattn/ttyrec4windows/ttyplay
 ```
 
 ## Screenshot
