@@ -1,8 +1,8 @@
 package main
 
 import (
+	"bufio"
 	"bytes"
-	"code.google.com/p/mahonia"
 	"encoding/binary"
 	"flag"
 	"fmt"
@@ -13,6 +13,8 @@ import (
 	"syscall"
 	"time"
 	"unsafe"
+
+	enc "github.com/mattn/go-encoding"
 )
 
 const (
@@ -114,7 +116,7 @@ func main() {
 		os.Exit(1)
 	}
 
-	dec := mahonia.NewDecoder(*flag_e)
+	dec := enc.GetEncoding(*flag_e)
 	if dec == nil {
 		fmt.Fprintln(os.Stderr, "Unknown encoding name")
 		os.Exit(1)
@@ -139,7 +141,7 @@ func main() {
 	go func() {
 		<-sc
 		timer.Stop()
-		quit<-true
+		quit <- true
 	}()
 
 	var lastbuf bytes.Buffer
@@ -184,8 +186,9 @@ loop:
 			off += n
 		}
 
-		er := dec.NewReader(bytes.NewBuffer(data))
-		parse: for {
+		er := bufio.NewReader(dec.NewDecoder().Reader(bytes.NewBuffer(data)))
+	parse:
+		for {
 			r1, _, err := procGetConsoleScreenBufferInfo.Call(uintptr(out), uintptr(unsafe.Pointer(&csbi)))
 			if r1 == 0 {
 				break loop
